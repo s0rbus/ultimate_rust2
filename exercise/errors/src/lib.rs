@@ -14,7 +14,33 @@
 // Once you have completed defining the error type correctly, you should be able to run
 // `cargo build --lib` without any build errors or warnings. Then go to main.rs and continue with #2
 
-// pub enum DolphinError...
+//use std::error::Error;
+//use std::fmt::{Display, Formatter};
+use thiserror::Error;
+
+#[derive(Debug, Error)]
+#[non_exhaustive]
+pub enum DolphinError {
+    #[error("The dolphin is hungry")]
+    Hungry,
+    #[error("The dolphin is too young")]
+    TooYoung,
+    #[error("The name is too long")]
+    LongName,
+}
+
+// impl Display for DolphinError {
+//     fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
+//         use DolphinError::*;
+//         match self {
+//             Hungry => write!(f, "The dolphin is hungey"),
+//             TooYoung => write!(f, "The dolphin is too young"),
+//             LongName => write!(f, "The name is too long"),
+//         }
+//     }
+// }
+
+//impl Error for DolphinError {}
 
 pub struct Dolphin {
     pub name: String,
